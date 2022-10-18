@@ -11,13 +11,13 @@ namespace Patron
         private static string AlbumJsonPath = "Database/Album.json";
         private static string TrackJsonPath = "Database/Track.json";
         private static List<Album> albums = new();
-        private static List<Track> tracks = new();
+        private static List<TempTrack> tracks = new();
 
         public static void AddAlbum()
         {
             albums = JsonConvert.DeserializeObject<List<Album>>(File.ReadAllText(AlbumJsonPath));
 
-            foreach (Track track in tracks)
+            foreach (TempTrack track in tracks)
             {
                 albums[track.AlbumID - 1].AddTrack(track);
             }
@@ -25,11 +25,11 @@ namespace Patron
 
         public static void AddTrack()
         {
-            tracks = JsonConvert.DeserializeObject<List<Track>>(File.ReadAllText(TrackJsonPath));
+            tracks = JsonConvert.DeserializeObject<List<TempTrack>>(File.ReadAllText(TrackJsonPath));
         }
 
         public static List<Album> GetAlbums() => albums;
-        public static List<Track> GetTracks() => tracks;
+        public static List<TempTrack> GetTracks() => tracks;
 
         /*public static void test()
         {
